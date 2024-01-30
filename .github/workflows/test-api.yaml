@@ -12,14 +12,14 @@ jobs:
     services:
       app:
         image: alialaa17/simple-node-api
-        ports:
-          - 3000:3000
+        # ports:
+        #   - 3000:3000
         env:
           MONGO_HOSTNAME: mongo
       mongo:
         image: mongo
-        ports:
-          - 27017:27017
+        # ports:
+        #   - 27017:27017
     steps:
       - name: Install curl
         run: apt-get update && apt-get install -y curl
