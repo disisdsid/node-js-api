@@ -23,8 +23,8 @@ jobs:
         with:
           images: alialaa17/simple-node-api
           tags: |
-            semver-pattern: '{{version}}'
-            semver-pattern: '{{major}}.{{minor}}'
+            semver-pattern='{{version}}'
+            semver-pattern='{{major}}.{{minor}}'
           labels: |
             org.opencontainers.image.title=My Node.js App
             org.opencontainers.image.description=Description of my Node.js App
