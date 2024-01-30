@@ -19,7 +19,7 @@ jobs:
               with:
                 images: alialaa17/simple-node-api
                 tags: 1.1.2          
-            - name: Build and Publish Docker Images
+            - name: Build and Publish Docker Image
               uses: docker/build-push-action@v4
               with: 
                 context: .
