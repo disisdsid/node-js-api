@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Install curl
         run: apt-get update && apt-get install -y curl
+      - name: Wait for Service
+        run: sleep 10  # Adjust the sleep duration based on the time needed for your service to start.
       - name: Dump Services Context
         run: echo '${{ toJson('services') }}'
       - name: Post a User
