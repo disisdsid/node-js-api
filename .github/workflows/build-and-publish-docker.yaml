@@ -19,8 +19,8 @@ jobs:
               with:
                 images: alialaa17/simple-node-api
                 tags: |
-                    semver={{version}}
-                    semver={{major}}.{{minor}}
+                  semver-pattern={{ version }}
+                  semver-pattern={{ major }}.{{ minor }}
             - name: Build and Publish Docker Images
               uses: docker/build-push-action@v4
               with: 
