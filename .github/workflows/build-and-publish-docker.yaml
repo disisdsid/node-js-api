@@ -1,44 +1,31 @@
-name: Build and Publish Docker Image
-
-on:
-  release:
-    types: [published]
+name: Build and Publish Docker Image 
+on: 
+    release:
+        types: [published]
 
 jobs:
-  push-to-dockerhub:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Extract Metadata
-        id: metadata
-        uses: docker/metadata-action@v4
-        with:
-          images: alialaa17/simple-node-api
-          tags: |
-            semver-pattern='{{version}}'
-            semver-pattern='{{major}}.{{minor}}'
-          labels: |
-            org.opencontainers.image.title=My Node.js App
-            org.opencontainers.image.description=Description of my Node.js App
-            org.opencontainers.image.version=${{ github.event.release.tag_name }}
-            org.opencontainers.image.url=https://github.com/alialaa17/simple-node-api
-            org.opencontainers.image.source=https://github.com/alialaa17/simple-node-api.git
-            org.opencontainers.image.authors=Ali Alaa
-            org.opencontainers.image.licenses=MIT
-
-      - name: Build and Publish Docker Image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.metadata.outputs.tags }}
-          labels: ${{ steps.metadata.outputs.labels }}
+    push-to-dockerhub:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Login to DockerHub
+              uses: docker/login-action@v2
+              with:
+                username: ${{ secrets.DOCKER_USERNAME }}
+                password: ${{ secrets.DOCKER_PASSWORD }}
+            - name: Extract Metadata
+              id: metadata
+              uses: docker/metadata-action@v4
+              with:
+                images: alialaa17/simple-node-api
+                tags: |
+                    semver={{version}}
+                    semver={{major}}.{{minor}}
+            - name: Build and Publish Docker Image
+              uses: docker/build-push-action@v4
+              with: 
+                context: .
+                file: ./Dockerfile
+                push: true
+                tags: ${{ steps.metadata.outputs.tags }}
+                labels: ${{ steps.metadata.outputs.labels }}
