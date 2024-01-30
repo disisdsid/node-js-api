@@ -1,0 +1,30 @@
+name: Test API
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    container: ubuntu:20.04
+    services:
+      app:
+        image: alialaa17/simple-node-api
+        ports:
+          - 3001:3000
+        env:
+          MONGO_HOSTNAME: mongo
+      mongo:
+        image: mongo
+        ports:
+          - 27017:27017
+    steps:
+      - name: Dump Services Context
+        run: echo '${{ toJson('services') }}'
+      - name: Post a User
+        run: |
+          curl -X POST http://localhost:3001/api/users -H "Content-Type: application/json" -d '{"username": "hello", "address": "dwded"}'
+      - name: Get Users
+        run: curl http://localhost:3001/api/users
