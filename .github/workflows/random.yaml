@@ -1,0 +1,15 @@
+name: random workflow
+on: [push]
+
+jobs:
+    linux-command-output:
+        runs-on: ubuntu-latest
+        name: output of command
+        steps:
+          - name: commands
+            run: |
+                echo "hi i am here"
+                touch abc.txt
+                $RANDOM
+                $DATE
+                ip a
