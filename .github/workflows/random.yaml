@@ -6,10 +6,9 @@ jobs:
         runs-on: ubuntu-latest
         name: output of command
         steps:
-          - name: Run commands
+          - name: commands
             run: |
-              echo "hi i am here"
-              touch abc.txt
-              echo "Random Number: $RANDOM"
-              echo "Current Date and Time: $(date)"
-              ip a
+                echo "hi i am here"
+                $RANDOM
+                $DATE
+                ip a
